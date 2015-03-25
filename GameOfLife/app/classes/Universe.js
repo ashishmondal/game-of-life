@@ -57,7 +57,7 @@ define(["require", "exports", "classes/Cell"], function (require, exports, gol) 
         };
         Universe.prototype.setSpeed = function (s) {
             this.speed = s;
-            $("#speed").html('' + this.speed);
+            $("#speed").html("" + this.speed);
         };
         Universe.prototype.incSpeed = function () {
             this.setSpeed(Math.min(this.speed + 1, 10));

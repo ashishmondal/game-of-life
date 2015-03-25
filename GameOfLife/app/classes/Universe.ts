@@ -70,7 +70,7 @@ export class Universe {
 
     public setSpeed(s: number) {
         this.speed = s;
-        $("#speed").html('' + this.speed);
+        $("#speed").html("" + this.speed);
     }
 
     public incSpeed() {

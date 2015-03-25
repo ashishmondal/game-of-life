@@ -25,9 +25,9 @@ export class AppMain {
                 case 27:
                     $("#help").fadeOut();
                     break;
-                case 188: universe.decSpeed();
+                case 40: universe.decSpeed();
                     break;
-                case 190: universe.incSpeed();
+                case 38: universe.incSpeed();
                     break;
             }
         });

@@ -23,10 +23,10 @@ define(["require", "exports", "classes/Universe"], function (require, exports, g
                     case 27:
                         $("#help").fadeOut();
                         break;
-                    case 188:
+                    case 40:
                         universe.decSpeed();
                         break;
-                    case 190:
+                    case 38:
                         universe.incSpeed();
                         break;
                 }
