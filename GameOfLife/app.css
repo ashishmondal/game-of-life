@@ -1,0 +1,73 @@
+﻿body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    font-family: 'Audiowide', monospace;
+}
+
+#help {
+    display: none;
+    background: rgba(0, 0, 0, 0.50);
+    text-align: center;
+    position: relative;
+    color: white;
+    margin: 50px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    border: 1px dashed #86fc00;
+    z-index: 2;
+}
+
+pre {
+    color: #86fc00;
+    text-align: center;
+    margin: 50px;
+}
+
+.key {
+    color: #86fc00;
+    padding-right: 10px;
+}
+
+thead {
+    color: #86fc00;
+}
+
+h1 {
+    color: #86fc00;
+    border-bottom: 1px dashed;
+}
+
+.dead {
+    background: #122400;
+}
+
+.alive {
+    background: #86fc00;
+    box-shadow: 0 0 8px greenyellow;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+footer {
+    color: white;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    font-size: small;
+    padding-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    z-index: 2;
+}
+
+footer p{
+    display: inline;
+  color: #86fc00;
+}
+
+footer span{
+    margin-right: 50px;
+}
