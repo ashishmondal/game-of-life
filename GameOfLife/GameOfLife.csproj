@@ -33,6 +33,7 @@
     <TypeScriptCompile Include="modules\require.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="mondal.in.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
