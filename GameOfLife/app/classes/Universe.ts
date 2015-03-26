@@ -7,7 +7,7 @@ export class Universe {
     private rows: number;
     private keepRunning: boolean = false;
     public speed: number = 5;
-    private element: JQuery;
+    private context: CanvasRenderingContext2D;
 
     constructor(private width: number, private height: number) {
 
@@ -15,15 +15,32 @@ export class Universe {
         this.columns = (width / gol.Cell.CellSize) | 0;
         this.rows = (height / gol.Cell.CellSize) | 0;
 
-        this.element = $("<div>");
+        $("#universe").attr(
+            {
+                width: width,
+                height: height
+            });
+
+        this.context = (<HTMLCanvasElement>($("#universe")[0])).getContext("2d");
+
         for (var y = 0; y < this.rows; y++) {
             for (var x = 0; x < this.columns; x++) {
-                this.cells.push(new gol.Cell(this.element, x, y));
+                this.cells.push(new gol.Cell(this.context, x, y));
             }
         }
 
+        $("#universe").click((eo: JQueryEventObject) => {
+            var cell = _.find(this.cells,(c: gol.Cell) => {
+                return c.rect.contains(eo.pageX, eo.pageY);
+            });
+
+            if (cell) {
+                cell.toggleLife();
+            }
+        });
+
         $("pre").hide();
-        $("#universe").append(this.element);
+        this.render();
     }
 
     evolve() {
@@ -61,8 +78,13 @@ export class Universe {
 
     public run() {
         if (this.keepRunning) {
+            var d1 = new Date().getTime();
             this.evolve();
             this.render();
+            var d2 = new Date().getTime();
+
+            var fps = 1000 / (d2 - d1);
+            $("#fps").html(fps.toFixed(3));
 
             _.delay(() => this.run(), 1000 - (this.speed * 100));
         }

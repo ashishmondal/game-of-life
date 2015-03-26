@@ -1,6 +1,7 @@
 define(["require", "exports", "classes/Cell"], function (require, exports, gol) {
     var Universe = (function () {
         function Universe(width, height) {
+            var _this = this;
             this.width = width;
             this.height = height;
             this.cells = new Array();
@@ -9,14 +10,26 @@ define(["require", "exports", "classes/Cell"], function (require, exports, gol) 
             /* tslint:disable:no-bitwise */
             this.columns = (width / gol.Cell.CellSize) | 0;
             this.rows = (height / gol.Cell.CellSize) | 0;
-            this.element = $("<div>");
+            $("#universe").attr({
+                width: width,
+                height: height
+            });
+            this.context = ($("#universe")[0]).getContext("2d");
             for (var y = 0; y < this.rows; y++) {
                 for (var x = 0; x < this.columns; x++) {
-                    this.cells.push(new gol.Cell(this.element, x, y));
+                    this.cells.push(new gol.Cell(this.context, x, y));
                 }
             }
+            $("#universe").click(function (eo) {
+                var cell = _.find(_this.cells, function (c) {
+                    return c.rect.contains(eo.pageX, eo.pageY);
+                });
+                if (cell) {
+                    cell.toggleLife();
+                }
+            });
             $("pre").hide();
-            $("#universe").append(this.element);
+            this.render();
         }
         Universe.prototype.evolve = function () {
             var _this = this;
@@ -50,8 +63,12 @@ define(["require", "exports", "classes/Cell"], function (require, exports, gol) 
         Universe.prototype.run = function () {
             var _this = this;
             if (this.keepRunning) {
+                var d1 = new Date().getTime();
                 this.evolve();
                 this.render();
+                var d2 = new Date().getTime();
+                var fps = 1000 / (d2 - d1);
+                $("#fps").html(fps.toFixed(3));
                 _.delay(function () { return _this.run(); }, 1000 - (this.speed * 100));
             }
         };

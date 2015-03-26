@@ -27,6 +27,7 @@
     <TypeScriptCompile Include="app\AppConfig.ts" />
     <TypeScriptCompile Include="app\AppMain.ts" />
     <TypeScriptCompile Include="app\classes\Cell.ts" />
+    <TypeScriptCompile Include="app\classes\Rect.ts" />
     <TypeScriptCompile Include="app\classes\Universe.ts" />
     <TypeScriptCompile Include="modules\jquery.d.ts" />
     <TypeScriptCompile Include="modules\lodash.d.ts" />
