@@ -7,11 +7,13 @@ define(["require", "exports", "classes/Rect"], function (require, exports, gol) 
             this.isAlive = false;
             this.survives = false;
             this.stateChanged = true;
+            this.lives = 0;
             this.rect = new gol.Rect(this.x * Cell.CellSize + 3, this.y * Cell.CellSize + 3, Cell.CellSize - 1, Cell.CellSize - 1);
         }
         Cell.prototype.moveToNextGeneration = function () {
             this.stateChanged = this.isAlive !== this.survives;
             this.isAlive = this.survives;
+            this.lives = this.isAlive ? 1 : 0;
         };
         Cell.prototype.render = function () {
             if (!this.stateChanged) {
@@ -24,6 +26,7 @@ define(["require", "exports", "classes/Rect"], function (require, exports, gol) 
         Cell.prototype.toggleLife = function () {
             this.isAlive = !this.isAlive;
             this.survives = !this.survives;
+            this.lives = this.isAlive ? 1 : 0;
             this.stateChanged = true;
             this.render();
         };

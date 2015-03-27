@@ -32,30 +32,24 @@ define(["require", "exports", "classes/Cell"], function (require, exports, gol) 
             this.render();
         }
         Universe.prototype.evolve = function () {
-            var _this = this;
-            _.forEach(this.cells, function (c) {
-                var neighborCount = 0;
-                for (var row = -1; row <= 1; row++) {
-                    for (var col = -1; col <= 1; col++) {
-                        if (row === 0 && col === 0) {
-                            continue;
-                        }
-                        var x = (c.x + col + _this.columns) % _this.columns;
-                        var y = (c.y + row + _this.rows) % _this.rows;
-                        var cell = _this.cells[y * _this.columns + x];
-                        if (cell.isAlive) {
-                            neighborCount++;
-                        }
-                    }
-                }
+            var i = 0;
+            var length = this.cells.length;
+            for (i = 0; i < length; i++) {
+                var c = this.cells[i];
+                var x = c.x, y = c.y;
+                var cc = this.columns;
+                var rc = this.rows;
+                var neighborCount = this.cells[(((y - 1 + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives + this.cells[(((y - 1 + rc) % rc) * cc) + ((x + cc) % cc)].lives + this.cells[(((y - 1 + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives + this.cells[(((y + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives + this.cells[(((y + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives + this.cells[(((y + 1 + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives + this.cells[(((y + 1 + rc) % rc) * cc) + ((x + cc) % cc)].lives + this.cells[(((y + 1 + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives;
                 if (c.isAlive) {
                     c.survives = neighborCount === 2 || neighborCount === 3;
                 }
                 else {
                     c.survives = neighborCount === 3;
                 }
-            });
-            _.forEach(this.cells, function (c) { return c.moveToNextGeneration(); });
+            }
+            for (i = 0; i < length; i++) {
+                this.cells[i].moveToNextGeneration();
+            }
         };
         Universe.prototype.render = function () {
             _.forEach(this.cells, function (c) { return c.render(); });

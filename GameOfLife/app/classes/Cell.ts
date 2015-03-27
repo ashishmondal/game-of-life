@@ -8,6 +8,7 @@ export class Cell {
     public lastClass: string;
     public stateChanged: boolean = true;
     public rect: gol.Rect;
+    public lives: number = 0;
 
     constructor(private context: CanvasRenderingContext2D, public x: number, public y: number) {
         this.rect = new gol.Rect(
@@ -20,6 +21,7 @@ export class Cell {
     moveToNextGeneration() {
         this.stateChanged = this.isAlive !== this.survives;
         this.isAlive = this.survives;
+        this.lives = this.isAlive ? 1 : 0;
     }
 
     render() {
@@ -36,6 +38,7 @@ export class Cell {
     toggleLife() {
         this.isAlive = !this.isAlive;
         this.survives = !this.survives;
+        this.lives = this.isAlive ? 1 : 0;
         this.stateChanged = true;
         this.render();
     }

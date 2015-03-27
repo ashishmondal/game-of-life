@@ -44,32 +44,35 @@ export class Universe {
     }
 
     evolve() {
-        _.forEach(this.cells,(c: gol.Cell) => {
-            var neighborCount: number = 0;
+        var i: number = 0;
+        var length = this.cells.length;
 
-            for (var row = -1; row <= 1; row++) {
-                for (var col = -1; col <= 1; col++) {
-                    if (row === 0 && col === 0) {
-                        continue;
-                    }
+        for (i = 0; i < length; i++) {
+            var c = this.cells[i];
+            var x = c.x, y = c.y;
+            var cc = this.columns;
+            var rc = this.rows;
 
-                    var x = (c.x + col + this.columns) % this.columns;
-                    var y = (c.y + row + this.rows) % this.rows;
-                    var cell = this.cells[y * this.columns + x];
-                    if (cell.isAlive) {
-                        neighborCount++;
-                    }
-                }
-            }
+            var neighborCount: number =
+                this.cells[(((y - 1 + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives +
+                this.cells[(((y - 1 + rc) % rc) * cc) + ((x + cc) % cc)].lives +
+                this.cells[(((y - 1 + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives +
+                this.cells[(((y + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives +
+                this.cells[(((y + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives +
+                this.cells[(((y + 1 + rc) % rc) * cc) + ((x - 1 + cc) % cc)].lives +
+                this.cells[(((y + 1 + rc) % rc) * cc) + ((x + cc) % cc)].lives +
+                this.cells[(((y + 1 + rc) % rc) * cc) + ((x + 1 + cc) % cc)].lives;
 
             if (c.isAlive) {
                 c.survives = neighborCount === 2 || neighborCount === 3;
             } else {
                 c.survives = neighborCount === 3;
             }
-        });
+        }
 
-        _.forEach(this.cells,(c: gol.Cell) => c.moveToNextGeneration());
+        for (i = 0; i < length; i++) {
+            this.cells[i].moveToNextGeneration();
+        }
     }
 
     render() {
