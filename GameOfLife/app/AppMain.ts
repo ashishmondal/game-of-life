@@ -31,5 +31,9 @@ export class AppMain {
                     break;
             }
         });
+
+        // for touch based devices
+        $("#status").click(() => universe.toggleState());
+        $("#speed").click(() => universe.incSpeed());
     }
 }

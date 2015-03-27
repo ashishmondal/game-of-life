@@ -31,6 +31,9 @@ define(["require", "exports", "classes/Universe"], function (require, exports, g
                         break;
                 }
             });
+            // for touch based devices
+            $("#status").click(function () { return universe.toggleState(); });
+            $("#speed").click(function () { return universe.incSpeed(); });
         };
         return AppMain;
     })();
