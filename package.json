@@ -1,0 +1,30 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "description": "Conways game of life",
+  "main": "index.js",
+  "scripts": {
+    "serve": "lite-server --baseDir=\"GameOfLife\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nulldev07/game-of-life.git"
+  },
+  "keywords": [
+    "game",
+    "of",
+    "life"
+  ],
+  "author": "Ashish K Mondal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nulldev07/game-of-life/issues"
+  },
+  "homepage": "https://github.com/nulldev07/game-of-life#readme",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
