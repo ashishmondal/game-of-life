@@ -1,5 +1,4 @@
-﻿require(["AppMain"],
-    (main: any) => {
-        var appMain = new main.AppMain();
-        appMain.run();
-    });
+﻿import {AppMain} from './AppMain';
+
+const appMain = new AppMain();
+appMain.run();

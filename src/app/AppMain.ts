@@ -7,9 +7,9 @@ export class AppMain {
 
 		var universe = new Universe(width, height);
 
-		_.defer(() => {
+		setTimeout(() => {
 			$("#help").show();
-		});
+		}, 0);
 
 		$(window).keydown((eo: JQueryEventObject) => {
 
